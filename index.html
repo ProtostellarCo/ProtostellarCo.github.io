@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ascot Vale · The account the deal runs on</title>
+<meta name="description" content="Business banking for private markets. One account per firm, per entity and per deal — funded at close, paid out through the deal, closed with a statement that reconciles.">
+<meta name="theme-color" content="#07533D">
+<meta property="og:title" content="Ascot Vale · The account the deal runs on">
+<meta property="og:description" content="One account per firm, per entity, per deal. Funded at close, paid out through the deal, closed with a statement that reconciles.">
+<meta property="og:type" content="website">
+<link rel="preload" href="/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geist-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:'Geist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/geist-variable.woff2) format('woff2')}
+@font-face{font-family:'Geist Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/geist-serif-regular.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(/fonts/Poppins-Light.ttf) format('truetype')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/Poppins-Regular.ttf) format('truetype')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/Poppins-Medium.ttf) format('truetype')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/Poppins-SemiBold.ttf) format('truetype')}
+
+:root{
+  color-scheme:light;
+  --n-0:#ffffff; --n-25:#fafaf8; --n-50:#f6f4ee; --n-75:#f3f2f1;
+  --n-100:#eeece6; --n-150:#e6e3da; --n-200:#dcdbd5; --n-300:#c9c6bc;
+  --n-500:#7a847f; --n-600:#5a6560; --n-700:#4a5550; --n-800:#2a332f; --n-900:#121614;
+  --g-25:#e7f3ec; --g-50:#d9ebe3; --g-100:#c2ddd1; --g-300:#a8d2c0;
+  --g-500:#3e8a6f; --g-700:#07533d; --g-800:#065a43; --g-900:#043528; --g-950:#0a3f31;
+  --amber-700:#b54708; --amber-25:#fdf1e7;
+  --red-700:#b42318;
+  --page:var(--n-50); --raised:var(--n-0); --hairline:var(--n-100); --line:var(--n-150);
+  --text:var(--n-900); --text-2:var(--n-700); --text-3:var(--n-600);
+  --ui:'Poppins',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:'Geist Serif',Georgia,'Times New Roman',serif;
+  --fig:'Geist',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --r:4px; --rface:8px;
+  --pad:clamp(20px,4vw,40px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--ui);font-weight:400;font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;letter-spacing:-.02em;line-height:1.06}
+p{margin:0}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--g-100);color:var(--n-900)}
+:focus-visible{outline:2px solid var(--g-700);outline-offset:2px;border-radius:2px}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--n-0);color:var(--n-900);padding:10px 14px;border-radius:var(--r);z-index:100}
+.skip:focus{left:12px;top:12px}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:40;background:rgba(246,244,238,.86);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--hairline)}
+.nav-in{display:flex;align-items:center;gap:32px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto}
+.brand img{height:19px;width:auto}
+.nav-links{display:flex;gap:28px;margin-left:8px}
+.nav-links a{font-size:14px;font-weight:400;color:var(--text-2);text-decoration:none;transition:color .12s linear}
+.nav-links a:hover{color:var(--n-900)}
+.nav-cta{margin-left:auto;display:flex;align-items:center;gap:18px}
+.nav-cta .quiet{font-size:14px;color:var(--text-2);text-decoration:none}
+.nav-cta .quiet:hover{color:var(--n-900)}
+
+.btn{height:48px;padding:0 22px;display:inline-flex;align-items:center;gap:14px;border-radius:var(--r);font-family:var(--ui);font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;transition:background .12s linear,box-shadow .12s linear}
+.btn-p{background:var(--g-700);color:var(--n-0);box-shadow:0 1px 2px rgba(4,53,40,.22),0 6px 14px -6px rgba(4,53,40,.35)}
+.btn-p:hover{background:var(--g-800);color:var(--n-0)}
+.btn-s{background:transparent;color:var(--n-900);box-shadow:inset 0 0 0 1px var(--n-300);font-weight:500}
+.btn-s:hover{box-shadow:inset 0 0 0 1px var(--n-500)}
+.btn .arw{font-family:var(--fig);font-size:16px;line-height:1;transform:translateY(-.5px)}
+.nav .btn{height:38px;padding:0 16px;font-size:14px;box-shadow:none}
+.nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--n-300);border-radius:var(--r);height:38px;padding:0 12px;font:500 14px var(--ui);color:var(--n-900)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(48px,7vw,96px) 0 clamp(40px,5vw,72px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,500px);gap:clamp(32px,5vw,72px);align-items:center}
+.eyebrow{font-family:var(--ui);font-size:11.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--g-700)}
+.hero h1{font-size:clamp(42px,5.6vw,72px);letter-spacing:-.032em;line-height:1.01;margin:20px 0 0}
+.hero h1 .dot{color:var(--g-700)}
+.hero-sub{margin-top:22px;font-size:clamp(16px,1.35vw,18px);line-height:1.6;color:var(--text-2);max-width:30em}
+.hero-sub strong{font-weight:500;color:var(--n-900)}
+.hero-actions{display:flex;align-items:center;gap:22px;margin-top:32px;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-size:13px;color:var(--text-3)}
+.hero-note span{color:var(--n-900);font-weight:500}
+
+/* ---------- panel: the position ---------- */
+.panel{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--rface);box-shadow:0 1px 2px rgba(18,22,20,.04),0 18px 40px -24px rgba(18,22,20,.18);overflow:hidden}
+.panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--hairline)}
+.acct{display:flex;align-items:center;gap:10px;min-width:0}
+.acct-mark{width:26px;height:26px;border-radius:var(--r);background:var(--g-25);color:var(--g-700);display:grid;place-items:center;font:600 11px var(--fig);flex:0 0 auto}
+.acct-name{font-size:13.5px;font-weight:500;color:var(--n-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-meta{font-size:11.5px;color:var(--text-3);letter-spacing:.02em}
+.pill{font-size:11px;font-weight:500;line-height:20px;height:20px;padding:0 8px;border-radius:var(--r);background:var(--g-25);color:var(--g-700);white-space:nowrap}
+.pill.amber{background:var(--amber-25);color:var(--amber-700)}
+.pill.grey{background:var(--n-75);color:var(--n-700)}
+.bal{padding:22px 20px 18px}
+.bal-lab{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500}
+.bal-fig{font-family:var(--fig);font-variant-numeric:tabular-nums lining-nums;font-size:clamp(32px,3.4vw,40px);letter-spacing:-.025em;line-height:1.1;margin-top:6px;color:var(--n-900)}
+.bal-sub{font-size:12.5px;color:var(--text-3);margin-top:6px}
+.attn{border-top:1px solid var(--hairline);padding:10px 20px 12px;background:var(--n-25)}
+.attn-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13px;color:var(--text-2)}
+.attn-row .ico{width:6px;height:6px;border-radius:50%;background:var(--amber-700);flex:0 0 auto}
+.attn-row .amt{margin-left:auto;font-family:var(--fig);font-variant-numeric:tabular-nums;font-size:13px;color:var(--n-900)}
+.moves{padding:6px 20px 8px}
+.move{display:flex;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px solid var(--hairline);font-size:13.5px}
+.move:last-child{border-bottom:0}
+.move-name{color:var(--n-900)}
+.move-meta{font-size:11.5px;color:var(--text-3);display:block;margin-top:1px}
+.move-amt{margin-left:auto;font-family:var(--fig);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:14px;color:var(--n-900)}
+.move-amt.credit{color:var(--g-700)}
+.panel-foot{display:flex;justify-content:space-between;align-items:center;padding:13px 20px;border-top:1px solid var(--hairline);font-size:12.5px;color:var(--text-3)}
+.panel-foot a{color:var(--g-700);text-decoration:none;font-weight:500}
+
+/* ---------- rails ---------- */
+.rails{border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);background:var(--n-25)}
+.rails-in{display:flex;flex-wrap:wrap;gap:10px 34px;padding:18px 0;align-items:center}
+.rail{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text-2)}
+.rail svg{width:15px;height:15px;stroke:var(--g-700);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+
+/* ---------- sections ---------- */
+.sec{padding:clamp(64px,8vw,120px) 0}
+.sec-h{font-size:clamp(30px,3.5vw,44px);letter-spacing:-.028em;line-height:1.07;max-width:22em}
+.sec-lede{margin-top:18px;font-size:16.5px;color:var(--text-2);max-width:38em}
+.split{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(32px,5vw,80px);align-items:center}
+.split.rev>.copy{order:2}
+
+/* accounts table */
+.tbl{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--rface);overflow:hidden;box-shadow:0 1px 2px rgba(18,22,20,.04)}
+.tbl-h,.tbl-r{display:grid;grid-template-columns:minmax(0,1fr) 132px 96px;gap:14px;align-items:center;padding:14px 20px}
+.tbl-h{background:var(--n-25);border-bottom:1px solid var(--hairline);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500}
+.tbl-r{border-bottom:1px solid var(--hairline)}
+.tbl-r:last-child{border-bottom:0}
+.tbl-name{font-size:14px;color:var(--n-900);font-weight:500}
+.tbl-sub{font-size:11.5px;color:var(--text-3);margin-top:2px}
+.tbl-amt{font-family:var(--fig);font-variant-numeric:tabular-nums;font-size:14.5px;text-align:right;color:var(--n-900)}
+.tbl-tag{justify-self:end}
+.tbl-foot{padding:13px 20px;background:var(--n-25);border-top:1px solid var(--hairline);font-size:12.5px;color:var(--text-3)}
+
+/* steps */
+.steps{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--hairline)}
+.step{flex:1;padding:0 0 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--n-500);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.step.on{color:var(--g-700);border-bottom-color:var(--g-700)}
+.step b{font-family:var(--fig);font-weight:500;margin-right:8px;color:inherit}
+.field{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--hairline);font-size:13.5px}
+.field:last-of-type{border-bottom:0}
+.field dt{color:var(--text-3);font-size:12.5px}
+.field dd{margin:0;color:var(--n-900);text-align:right;font-weight:500}
+.field dd.fig{font-family:var(--fig);font-variant-numeric:tabular-nums;font-weight:400}
+.verified{display:inline-flex;align-items:center;gap:5px;color:var(--g-700);font-size:11.5px;font-weight:500;margin-left:6px}
+.verified svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.panel-body{padding:18px 20px 20px}
+.panel-t{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500;padding:13px 20px;border-bottom:1px solid var(--hairline);background:var(--n-25);display:flex;justify-content:space-between;align-items:center}
+.receipt{display:flex;gap:14px;align-items:flex-start;padding:18px 20px}
+.receipt-mark{width:34px;height:34px;border-radius:50%;background:var(--g-25);display:grid;place-items:center;flex:0 0 auto}
+.receipt-mark svg{width:16px;height:16px;stroke:var(--g-700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.receipt-t{font-size:14px;font-weight:500}
+.receipt-s{font-size:12.5px;color:var(--text-3);margin-top:3px;line-height:1.5}
+.receipt-ref{font-family:var(--fig);font-size:11.5px;color:var(--text-3);margin-top:8px}
+.mini{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--rface);overflow:hidden}
+.mini+.mini{margin-top:14px}
+.mini-h{padding:11px 16px;border-bottom:1px solid var(--hairline);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500;background:var(--n-25)}
+.mini-b{padding:14px 16px}
+.mini-b .field{padding:9px 0}
+.mini-b .field:first-child{padding-top:0}
+.mini-b .field:last-child{padding-bottom:0}
+
+/* card */
+.cardface{background:linear-gradient(150deg,#07533d,#043528);color:var(--n-0);border-radius:var(--rface);padding:22px;aspect-ratio:1.586/1;max-width:380px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 4px rgba(4,53,40,.2),0 24px 48px -26px rgba(4,53,40,.5)}
+.cardface .cf-top{display:flex;justify-content:space-between;align-items:flex-start}
+.cardface .cf-brand{font-family:var(--fig);font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.9}
+.cardface .cf-kind{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--g-300)}
+.cardface .cf-num{font-family:var(--fig);font-variant-numeric:tabular-nums;font-size:17px;letter-spacing:.14em;color:rgba(255,255,255,.92)}
+.cardface .cf-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:11.5px}
+.cardface .cf-lab{display:block;color:rgba(255,255,255,.55);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+.cardface .cf-val{font-family:var(--fig);letter-spacing:.04em}
+.cardctl{max-width:380px;margin-top:16px;background:var(--raised);border:1px solid var(--hairline);border-radius:var(--rface);padding:16px 18px}
+.bar{height:6px;border-radius:var(--r);background:var(--n-100);overflow:hidden;margin:10px 0 8px}
+.bar i{display:block;height:100%;background:var(--g-700);border-radius:var(--r)}
+.cardctl-row{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--text-3)}
+.cardctl-row b{font-family:var(--fig);font-variant-numeric:tabular-nums;font-weight:400;color:var(--n-900);font-size:13px}
+.cardctl-actions{display:flex;gap:10px;margin-top:14px}
+.chip{height:32px;padding:0 12px;display:inline-flex;align-items:center;border-radius:var(--r);font:500 12.5px var(--ui);border:1px solid var(--n-300);background:transparent;color:var(--text-2)}
+.chip.on{border-color:var(--n-900);color:var(--n-900)}
+
+/* approval */
+.approval{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--rface);overflow:hidden;box-shadow:0 1px 2px rgba(18,22,20,.04)}
+.approval-top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--amber-25);border-bottom:1px solid var(--hairline)}
+.approval-top strong{font-size:13px;font-weight:500;color:var(--amber-700)}
+.approval-top span{font-size:12px;color:var(--text-2)}
+.approval-b{padding:20px}
+.approval-amt{font-family:var(--fig);font-variant-numeric:tabular-nums;font-size:32px;letter-spacing:-.02em;line-height:1.1}
+.approval-to{font-size:13.5px;color:var(--text-2);margin-top:6px}
+.approval-wait{display:flex;align-items:center;gap:10px;margin-top:18px;padding:12px 14px;border:1px dashed var(--n-300);border-radius:var(--r);font-size:13px;color:var(--text-2)}
+.avatar{width:24px;height:24px;border-radius:50%;background:var(--g-50);color:var(--g-700);display:grid;place-items:center;font:500 10.5px var(--fig);flex:0 0 auto}
+.approval-acts{display:flex;gap:10px;margin-top:18px}
+.btn-sm{height:38px;padding:0 16px;font-size:13.5px}
+
+/* dark */
+.dark{background:var(--g-900);color:var(--n-50)}
+.dark .eyebrow{color:var(--g-300)}
+.dark h2{color:var(--n-0)}
+.dark p{color:rgba(255,255,255,.72)}
+.dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,6vw,88px);align-items:start}
+.flowline{margin-top:34px;display:flex;flex-direction:column;gap:0}
+.fl{display:flex;gap:16px;padding:18px 0;border-top:1px solid rgba(255,255,255,.14)}
+.fl:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+.fl-n{font-family:var(--fig);font-size:11.5px;color:var(--g-300);padding-top:2px;flex:0 0 24px}
+.fl-t{font-size:15px;color:var(--n-0);font-weight:500}
+.fl-s{font-size:13.5px;color:rgba(255,255,255,.66);margin-top:3px;line-height:1.55}
+.dark-list{margin:0;padding:0;list-style:none;display:grid;gap:14px}
+.dark-list li{display:flex;gap:12px;font-size:14px;color:rgba(255,255,255,.8);line-height:1.5}
+.dark-list svg{width:16px;height:16px;stroke:var(--g-300);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;margin-top:3px}
+
+/* faq */
+.faq{border-top:1px solid var(--hairline)}
+.qa{padding:26px 0;border-bottom:1px solid var(--hairline);display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(20px,4vw,64px)}
+.qa h3{font-size:19px;font-family:var(--ui);font-weight:500;letter-spacing:-.005em;line-height:1.4}
+.qa p{font-size:15px;color:var(--text-2)}
+
+/* closing */
+.close{padding:clamp(72px,9vw,132px) 0}
+.close-in{background:var(--raised);border:1px solid var(--hairline);border-radius:var(--rface);padding:clamp(28px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.close h2{font-size:clamp(28px,3.4vw,40px);max-width:14em}
+.close p{margin-top:14px;font-size:15.5px;color:var(--text-2);max-width:34em}
+
+/* footer */
+footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw,72px) 0 40px}
+.f-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.14)}
+.f-brand img{height:18px;width:auto}
+.f-cols{display:flex;gap:clamp(36px,6vw,88px);flex-wrap:wrap}
+.f-col h4{margin:0 0 12px;font:500 11px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.f-col a{display:block;font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;padding:4px 0}
+.f-col a:hover{color:var(--n-0)}
+.f-bot{padding-top:26px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.6}
+.f-bot p{max-width:64ch}
+
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .split,.dark-grid,.qa{grid-template-columns:1fr;gap:32px}
+  .split.rev>.copy{order:0}
+  .nav-links,.nav-cta .quiet{display:none}
+  .nav-toggle{display:inline-flex;align-items:center}
+  .panel{max-width:560px}
+}
+@media (max-width:640px){
+  .hero{padding-top:36px}
+  .hero h1{font-size:clamp(38px,11vw,48px)}
+  .btn{width:100%;justify-content:space-between}
+  .hero-actions{gap:12px}
+  .nav .btn{width:auto}
+  .tbl-h,.tbl-r{grid-template-columns:minmax(0,1fr) 104px;gap:10px;padding:13px 16px}
+  .tbl-h span:last-child,.tbl-r .tbl-tag{display:none}
+  .tbl-amt{font-size:13.5px}
+  .cardface{max-width:none}
+  .cardctl{max-width:none}
+  .close-in{flex-direction:column;align-items:flex-start}
+  .close .btn{width:auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Ascot Vale, home"><img src="/assets/wordmark-ink.svg" alt="Ascot Vale"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#accounts">Accounts</a>
+      <a href="#payments">Payments</a>
+      <a href="#cards">Cards</a>
+      <a href="#controls">Controls</a>
+      <a href="#record">The record</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="quiet" href="#how">How it works</a>
+      <a class="btn btn-p" href="#open">Open an account</a>
+    </div>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Business banking for private markets</p>
+      <h1 id="hero-h">The account<br>the deal<br>runs on<span class="dot">.</span></h1>
+      <p class="hero-sub">One account for the firm, one for the entity a closing creates, one for the deal itself. Funded at close, paid out through the deal, and closed with a statement that reconciles <strong>to the cent</strong>.</p>
+      <div class="hero-actions">
+        <a class="btn btn-p" href="#open">Open an account <span class="arw" aria-hidden="true">→</span></a>
+        <a class="btn btn-s" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note">For firms that do deals and the entities they create. <span>Not a consumer account.</span></p>
+    </div>
+
+    <div class="panel" role="group" aria-label="Example account position">
+      <div class="panel-top">
+        <div class="acct">
+          <span class="acct-mark" aria-hidden="true">AV</span>
+          <div>
+            <div class="acct-name">Ascot 42 LLC</div>
+            <div class="acct-meta">Deal account · •••• 9912</div>
+          </div>
+        </div>
+        <span class="pill">Closing</span>
+      </div>
+      <div class="bal">
+        <div class="bal-lab">Available balance</div>
+        <div class="bal-fig">$2,481,250.00</div>
+        <div class="bal-sub">Opening $400,000.00 · 3 movements today · 09:41 ET</div>
+      </div>
+      <div class="attn">
+        <div class="attn-row"><span class="ico" aria-hidden="true"></span> A wire is waiting for a second signature <span class="amt">$418,750.00</span></div>
+        <div class="attn-row"><span class="ico" aria-hidden="true"></span> One document to sign <span class="amt">14:00</span></div>
+      </div>
+      <div class="moves">
+        <div class="move">
+          <div><span class="move-name">Cobalt Holdings</span><span class="move-meta">Wire in · today 09:12</span></div>
+          <span class="move-amt credit">+$2,500,000.00</span>
+        </div>
+        <div class="move">
+          <div><span class="move-name">Wachtell, Lipton</span><span class="move-meta">Legal · today 08:03</span></div>
+          <span class="move-amt">−$418,750.00</span>
+        </div>
+        <div class="move">
+          <div><span class="move-name">Card · Deloitte</span><span class="move-meta">Advisory · yesterday</span></div>
+          <span class="move-amt">−$1,240.00</span>
+        </div>
+      </div>
+      <div class="panel-foot"><span>Nothing here is a placeholder</span><a href="#accounts">Open the account →</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="rails">
+  <div class="wrap rails-in">
+    <span class="rail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M13 7l5 5-5 5"/></svg>ACH in and out</span>
+    <span class="rail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h14M13 4l4 4-4 4M21 16H7M11 12l-4 4 4 4"/></svg>Domestic wires</span>
+    <span class="rail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>Virtual cards</span>
+    <span class="rail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 10-4-2.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Approvals by amount</span>
+    <span class="rail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7"/></svg>Statements that reconcile</span>
+    <span class="rail"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>A record of every action</span>
+  </div>
+</div>
+
+<section class="sec" id="accounts" aria-labelledby="acc-h">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="eyebrow">Accounts</p>
+      <h2 class="sec-h" id="acc-h">One account per entity, not one per person.</h2>
+      <p class="sec-lede">A firm, the fund, and the company a closing creates are three different things with three different balances. Ascot Vale opens an account for each one, and puts all three in a single position — with the number, the statement and the permissions each one needs.</p>
+    </div>
+    <div class="tbl" role="table" aria-label="Accounts">
+      <div class="tbl-h" role="row"><span role="columnheader">Account</span><span class="tbl-amt" role="columnheader">Balance</span><span role="columnheader" style="text-align:right">State</span></div>
+      <div class="tbl-r" role="row">
+        <div role="cell"><div class="tbl-name">Meridian Partners</div><div class="tbl-sub">Operating · •••• 4410</div></div>
+        <div class="tbl-amt" role="cell">$482,110.44</div>
+        <div class="tbl-tag" role="cell"><span class="pill">Active</span></div>
+      </div>
+      <div class="tbl-r" role="row">
+        <div role="cell"><div class="tbl-name">Meridian Fund III</div><div class="tbl-sub">SPV · Cayman · •••• 7288</div></div>
+        <div class="tbl-amt" role="cell">$12,400,000.00</div>
+        <div class="tbl-tag" role="cell"><span class="pill">Funded</span></div>
+      </div>
+      <div class="tbl-r" role="row">
+        <div role="cell"><div class="tbl-name">Ascot 42 LLC</div><div class="tbl-sub">Deal · •••• 9912</div></div>
+        <div class="tbl-amt" role="cell">$2,481,250.00</div>
+        <div class="tbl-tag" role="cell"><span class="pill amber">Closing</span></div>
+      </div>
+      <div class="tbl-foot">One login, three balances, and a consolidated position the firm can actually read.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="payments" aria-labelledby="pay-h">
+  <div class="wrap split rev">
+    <div class="copy">
+      <p class="eyebrow">Money in and out</p>
+      <h2 class="sec-h" id="pay-h">Three steps, and the third one is a receipt.</h2>
+      <p class="sec-lede">A payee is saved once and verified once, then reused everywhere instead of retyped. The amount is dollars on the screen and cents in the ledger. The review step repeats every detail before a wire leaves, and the receipt lands in the account and in the deal.</p>
+    </div>
+    <div>
+      <div class="mini">
+        <div class="steps" style="padding:0 16px">
+          <div class="step"><b>1</b>Payee</div>
+          <div class="step"><b>2</b>Amount</div>
+          <div class="step on"><b>3</b>Review</div>
+        </div>
+        <div class="mini-b">
+          <dl style="margin:0">
+            <div class="field"><dt>To</dt><dd>Wachtell, Lipton, Rosen &amp; Katz<span class="verified"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg>verified</span></dd></div>
+            <div class="field"><dt>From</dt><dd>Ascot 42 LLC · •••• 9912</dd></div>
+            <div class="field"><dt>Amount</dt><dd class="fig">$418,750.00</dd></div>
+            <div class="field"><dt>Rail</dt><dd>Domestic wire</dd></div>
+            <div class="field"><dt>Memo</dt><dd>Retainer and closing fees</dd></div>
+          </dl>
+          <div class="approval-acts">
+            <span class="btn btn-p btn-sm" role="presentation">Approve and send</span>
+            <span class="btn btn-s btn-sm" role="presentation">Back</span>
+          </div>
+          <p style="font-size:12px;color:var(--text-3);margin-top:12px">Above the firm's threshold, this button reads <em>Send for approval</em> and waits for a second person.</p>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="receipt">
+          <span class="receipt-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></span>
+          <div>
+            <div class="receipt-t">Wire sent · $418,750.00</div>
+            <div class="receipt-s">Wachtell, Lipton, Rosen &amp; Katz · Ascot 42 LLC<br>Sent 08:03, delivered 11:26, $18.00 fee</div>
+            <div class="receipt-ref">REF AV-8841-0412 · receipt in the record</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cards" aria-labelledby="card-h">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="eyebrow">Cards</p>
+      <h2 class="sec-h" id="card-h">The card is part of the control, not the expense.</h2>
+      <p class="sec-lede">A virtual card per person and per purpose. A monthly cap that shows how much of it is spent. One switch to freeze it. Every charge arrives with a receipt, and the receipt is filed against the deal it belongs to — so month-end is a read, not a reconstruction.</p>
+    </div>
+    <div>
+      <div class="cardface" role="img" aria-label="A virtual Ascot Vale card ending 4412, held by D. Okonkwo">
+        <div class="cf-top">
+          <span class="cf-brand">Ascot Vale</span>
+          <span class="cf-kind">Virtual</span>
+        </div>
+        <div class="cf-num">4412 •••• •••• 7326</div>
+        <div class="cf-bot">
+          <div><span class="cf-lab">Holder</span><span class="cf-val">D. Okonkwo</span></div>
+          <div><span class="cf-lab">Purpose</span><span class="cf-val">Deal costs</span></div>
+        </div>
+      </div>
+      <div class="cardctl">
+        <div class="cardctl-row"><span>Monthly cap</span><b>$15,000.00</b></div>
+        <div class="bar" role="img" aria-label="21.6% of the monthly cap spent"><i style="width:21.6%"></i></div>
+        <div class="cardctl-row"><span>Spent this month</span><b>$3,240.18</b></div>
+        <div class="cardctl-actions">
+          <span class="chip on">Active</span>
+          <span class="chip">Freeze</span>
+          <span class="chip">Statements</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="controls" aria-labelledby="ctl-h">
+  <div class="wrap split rev">
+    <div class="copy">
+      <p class="eyebrow">Controls</p>
+      <h2 class="sec-h" id="ctl-h">Above the threshold, a second person signs.</h2>
+      <p class="sec-lede">The threshold is set per firm and per entity. Anything above it waits for a named person, and the record says who asked, who signed and when. Below it, the payment goes — the control is a limit, not a queue for everything.</p>
+    </div>
+    <div class="approval">
+      <div class="approval-top"><strong>Waiting for approval</strong><span>Requested 08:03</span></div>
+      <div class="approval-b">
+        <div class="approval-amt">$418,750.00</div>
+        <div class="approval-to">Wire to Wachtell, Lipton, Rosen &amp; Katz · Ascot 42 LLC</div>
+        <div class="approval-wait"><span class="avatar" aria-hidden="true">DO</span> Dana Okonkwo can approve · the request is above the firm's $25,000 threshold</div>
+        <div class="approval-acts">
+          <span class="btn btn-p btn-sm" role="presentation">Approve</span>
+          <span class="btn btn-s btn-sm" role="presentation">Decline</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="record" aria-labelledby="rec-h">
+  <div class="wrap">
+    <p class="eyebrow">The record</p>
+    <h2 class="sec-h" id="rec-h" style="margin-top:16px">The deal ends; the statement still reconciles.</h2>
+    <p class="sec-lede" style="max-width:40em">Every account has its own statement, by period, exportable as CSV or PDF. Statements, agreements and the audit trail sit beside the account — and export to the books without retyping a line.</p>
+    <div class="tbl" style="margin-top:36px" role="table" aria-label="Statements">
+      <div class="tbl-h" role="row"><span role="columnheader">Statement</span><span class="tbl-amt" role="columnheader">Period</span><span role="columnheader" style="text-align:right">Export</span></div>
+      <div class="tbl-r" role="row">
+        <div role="cell"><div class="tbl-name">Ascot 42 LLC</div><div class="tbl-sub">Movement statement</div></div>
+        <div class="tbl-amt" role="cell">Oct 2026</div>
+        <div class="tbl-tag" role="cell"><span class="pill grey">CSV · PDF</span></div>
+      </div>
+      <div class="tbl-r" role="row">
+        <div role="cell"><div class="tbl-name">Ascot 42 LLC</div><div class="tbl-sub">Closing statement</div></div>
+        <div class="tbl-amt" role="cell">Nov 2026</div>
+        <div class="tbl-tag" role="cell"><span class="pill grey">PDF</span></div>
+      </div>
+      <div class="tbl-r" role="row">
+        <div role="cell"><div class="tbl-name">Meridian Partners</div><div class="tbl-sub">Audit trail · every action, timestamped</div></div>
+        <div class="tbl-amt" role="cell">To date</div>
+        <div class="tbl-tag" role="cell"><span class="pill grey">CSV</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark" id="how" aria-labelledby="how-h">
+  <div class="wrap dark-grid">
+    <div>
+      <p class="eyebrow">The front door</p>
+      <h2 class="sec-h" id="how-h" style="margin-top:14px">It opens from the deal.</h2>
+      <p class="sec-lede" style="margin-top:18px">The firm already has the deal in brokr: the room, the counterparties, the entity the closing creates. The account opens from that entity, and its statement comes back to the room — no second onboarding, no set of payees typed twice.</p>
+      <div class="flowline">
+        <div class="fl"><span class="fl-n">01</span><div><div class="fl-t">The deal</div><div class="fl-s">A room with the documents, the parties and the terms.</div></div></div>
+        <div class="fl"><span class="fl-n">02</span><div><div class="fl-t">The entity</div><div class="fl-s">The company the closing creates, with its own account.</div></div></div>
+        <div class="fl"><span class="fl-n">03</span><div><div class="fl-t">The money</div><div class="fl-s">Funded at close, paid out through the deal, closed with a statement.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <ul class="dark-list">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 10-4-2.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>The counterparties are the ones already in the room — saved and verified once.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 10-4-2.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Roles and approval thresholds per firm and per entity, with who did what on the record.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 10-4-2.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>A second factor on wires and on any change to where money is sent.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 10-4-2.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Customer money is held by a partner bank, never on Ascot Vale's balance sheet. Ascot Vale is a financial technology company, not a bank.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="faq-h">
+  <div class="wrap">
+    <p class="eyebrow">Questions</p>
+    <h2 class="sec-h" id="faq-h" style="margin-top:16px">The four that come up first.</h2>
+    <div class="faq" style="margin-top:36px">
+      <div class="qa">
+        <h3>Is Ascot Vale a bank?</h3>
+        <p>Ascot Vale is a financial technology company. Banking services are provided by a partner bank, and deposits are held there — not on Ascot Vale's balance sheet. We say which bank on the account agreement, in writing, before an account opens.</p>
+      </div>
+      <div class="qa">
+        <h3>Who is it for?</h3>
+        <p>Firms that do deals, and the entities a closing creates. A private-market firm, a fund's SPV, the company a transaction sets up. It is not a consumer account, and it is not a personal one.</p>
+      </div>
+      <div class="qa">
+        <h3>What does an account cost?</h3>
+        <p>Pricing is agreed per firm, on the number of entities and the people who need access. There is no published card and no per-transaction surprise — <a href="#open" style="color:var(--g-700);text-decoration:none;font-weight:500">ask for the terms</a>.</p>
+      </div>
+      <div class="qa">
+        <h3>When can an account open?</h3>
+        <p>The platform is in build now: accounts, movements, cards, approvals and statements on seeded data, before a partner bank is named. Ask for access and you will be in the first group that opens one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close" id="open" aria-labelledby="open-h">
+  <div class="wrap">
+    <div class="close-in">
+      <div>
+        <h2 id="open-h">Open the account the deal runs on.</h2>
+        <p>Tell us the firm and the first entity. We will come back with the account, the card and the controls it needs.</p>
+      </div>
+      <a class="btn btn-p" href="https://www.ascotvale.app/access">Open an account <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand"><img src="/assets/wordmark-ivory.svg" alt="Ascot Vale"></div>
+      <div class="f-cols">
+        <div class="f-col"><h4>Product</h4><a href="#accounts">Accounts</a><a href="#payments">Payments</a><a href="#cards">Cards</a><a href="#controls">Controls</a><a href="#record">Statements</a></div>
+        <div class="f-col"><h4>Company</h4><a href="#how">How it works</a><a href="https://www.ascotvale.app/services">Services</a><a href="https://www.ascotvale.app/research">Research</a></div>
+        <div class="f-col"><h4>Access</h4><a href="https://www.ascotvale.app/access">Request access</a><a href="https://www.ascotvale.app/login">Sign in</a><a href="https://www.ascotvale.app/legal">Legal</a></div>
+      </div>
+    </div>
+    <div class="f-bot">
+      <p>Ascot Vale is a financial technology company, not a bank. Banking services are provided by a partner bank; deposits are held at that bank and are not on Ascot Vale's balance sheet. Cards are issued by a partner issuer. Ascot Vale does not lend, give advice, hold custody or deal in securities.</p>
+      <p>© 2026 Protostellar Inc.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

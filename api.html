@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ascot Vale · API reference</title>
+<meta name="description" content="The Ascot Vale payments API: payment intents, refunds, payouts, webhooks and events. Test mode open now; live mode opens with the partner bank.">
+<meta name="theme-color" content="#070a09">
+<link rel="preload" href="/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geist-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:'Geist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/geist-variable.woff2) format('woff2')}
+@font-face{font-family:'Geist Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/geist-serif-regular.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/Poppins-Regular.ttf) format('truetype')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/Poppins-Medium.ttf) format('truetype')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/Poppins-SemiBold.ttf) format('truetype')}
+:root{
+  color-scheme:dark;
+  --bg:#070a09;--bg2:#0b100f;--panel:#0d1412;--panel2:#101816;
+  --line:#1a2421;--line2:#243029;
+  --tx:#e9efec;--tx2:#a9b8b1;--tx3:#7f918a;--tx4:#5d6d66;
+  --mint:#a8d2c0;--mint2:#7fbfa4;--green:#0f6b4e;--green2:#0b5540;
+  --amber:#e0a24a;--red:#e5766a;--blue:#86b6e6;
+  --ui:'Poppins',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --display:'Geist Serif',Georgia,serif;
+  --mono:'Geist',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:4px;--rface:8px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--ui);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.02em}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.06;letter-spacing:-.03em}
+h2{font-size:23px;line-height:1.25;margin-top:0}
+h3{font-size:15.5px;line-height:1.3}
+code,pre,kbd{font-family:var(--mono);font-variant-ligatures:none}
+::selection{background:rgba(168,210,192,.25)}
+:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-radius:2px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;background:var(--panel);padding:10px 14px;z-index:99;border-radius:4px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:40;background:rgba(7,10,9,.92);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line)}
+.top-in{max-width:1440px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:22px}
+.brand img{height:17px;width:auto;display:block}
+.top nav{display:flex;gap:20px;margin-left:6px}
+.top nav a{font-size:13px;color:var(--tx2)}
+.top nav a:hover,.top nav a.on{color:var(--tx)}
+.top nav a.on{color:var(--mint)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:3px;background:rgba(224,162,74,.12);color:var(--amber);font-size:11px;font-weight:500;letter-spacing:.02em;border:1px solid rgba(224,162,74,.25)}
+.badge i{width:5px;height:5px;border-radius:50%;background:var(--amber)}
+.top-r a.btn{height:32px;padding:0 13px;display:inline-flex;align-items:center;border-radius:var(--r);background:var(--mint);color:#06231a;font-size:12.5px;font-weight:600}
+
+/* shell */
+.shell{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:260px minmax(0,1fr) 220px;gap:0;align-items:start}
+@media (max-width:1200px){.shell{grid-template-columns:240px minmax(0,1fr)}.toc{display:none}}
+@media (max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}}
+
+/* sidebar */
+.side{position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;border-right:1px solid var(--line);padding:18px 14px 40px}
+.search{width:100%;height:34px;background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);color:var(--tx);font-family:var(--ui);font-size:12.5px;padding:0 10px;margin-bottom:16px}
+.search::placeholder{color:var(--tx4)}
+.search:focus{outline:none;border-color:var(--mint2)}
+.sg{margin:18px 0 6px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tx4);font-weight:500}
+.side a{display:block;padding:5px 8px;margin:1px 0;border-radius:3px;font-size:13px;color:var(--tx2);border-left:2px solid transparent}
+.side a:hover{background:var(--panel);color:var(--tx)}
+.side a.on{color:var(--mint);background:rgba(168,210,192,.07);border-left-color:var(--mint2)}
+.side a .m{font-family:var(--mono);font-size:10px;color:var(--tx4);margin-right:6px}
+.side .hidden{display:none}
+.side-foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--tx4);line-height:1.6}
+
+/* content */
+.main{padding:36px 44px 120px;min-width:0}
+@media (max-width:900px){.main{padding:24px 20px 80px}}
+.crumb{font-size:12px;color:var(--tx3);display:flex;gap:8px;align-items:center}
+.crumb b{color:var(--tx2);font-weight:500}
+.lede{margin-top:14px;font-size:16px;color:var(--tx2);max-width:62ch}
+main section{padding-top:44px;margin-top:44px;border-top:1px solid var(--line)}
+main section:first-of-type{border-top:0;margin-top:0;padding-top:36px}
+.sec-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sec-h h2{font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:-.025em}
+.method{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 7px;border-radius:3px;font-weight:500}
+.method.post{background:rgba(168,210,192,.12);color:var(--mint);border:1px solid rgba(168,210,192,.22)}
+.method.get{background:rgba(134,182,230,.12);color:var(--blue);border:1px solid rgba(134,182,230,.22)}
+.path{font-family:var(--mono);font-size:13px;color:var(--tx2)}
+p.body{margin-top:12px;color:var(--tx2);max-width:66ch}
+p.body + p.body{margin-top:10px}
+ul.body{margin:12px 0 0;padding-left:18px;color:var(--tx2)}
+ul.body li{margin:5px 0}
+.note{margin-top:18px;border:1px solid rgba(224,162,74,.28);background:rgba(224,162,74,.07);border-radius:var(--r);padding:12px 14px;font-size:13px;color:var(--tx2)}
+.note b{color:var(--amber);font-weight:500}
+.oknote{border-color:rgba(168,210,192,.24);background:rgba(168,210,192,.06)}
+.oknote b{color:var(--mint)}
+
+/* code */
+.code{margin-top:16px;border:1px solid var(--line2);border-radius:var(--rface);overflow:hidden;background:var(--panel)}
+.code-top{display:flex;align-items:center;gap:2px;padding:0 8px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.tab{appearance:none;background:none;border:0;color:var(--tx3);font-family:var(--ui);font-size:12px;padding:9px 10px;cursor:pointer;border-bottom:2px solid transparent}
+.tab.on{color:var(--tx);border-bottom-color:var(--mint2)}
+.tab:hover{color:var(--tx)}
+.code-top .why{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--tx4)}
+.copy{appearance:none;background:var(--panel2);border:1px solid var(--line2);color:var(--tx3);font-family:var(--ui);font-size:11px;padding:3px 8px;border-radius:3px;cursor:pointer;margin-left:8px}
+.copy:hover{color:var(--tx);border-color:var(--mint2)}
+.copy.done{color:var(--mint);border-color:rgba(168,210,192,.4)}
+pre{margin:0;padding:16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.75;color:#cdd8d3}
+pre .k{color:#8fa79b}
+pre .s{color:#d9c68b}
+pre .n{color:#9fc9b4}
+pre .c{color:#5c6f67;font-style:normal}
+pre .m{color:#a8d2c0}
+pre .p{color:#e7efeb}
+pre .r{color:#86b6e6}
+.pane{display:none}
+.pane.on{display:block}
+.resp-top{display:flex;align-items:center;gap:10px;padding:9px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);font-family:var(--mono);font-size:11px;color:var(--tx3)}
+.resp-top .st{color:#7fd1a8}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx4);font-weight:500;background:var(--bg2)}
+th:first-child,td:first-child{padding-left:12px}
+td code{font-size:12px;color:var(--mint)}
+tbody tr:hover{background:rgba(255,255,255,.015)}
+td.r{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* calculator */
+.calc{margin-top:18px;border:1px solid var(--line2);border-radius:var(--rface);background:var(--panel);overflow:hidden}
+.calc-b{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:18px}
+@media (max-width:700px){.calc-b{grid-template-columns:1fr}}
+.field label{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx4);margin-bottom:6px}
+.field input,.field select{width:100%;height:38px;background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);color:var(--tx);font-family:var(--mono);font-size:13px;padding:0 10px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--mint2)}
+.calc-out{border-top:1px solid var(--line);background:var(--bg2);padding:16px 18px;display:flex;gap:36px;flex-wrap:wrap;align-items:baseline}
+.calc-out .lab{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx4)}
+.calc-out .val{font-family:var(--mono);font-size:26px;letter-spacing:-.02em;color:var(--tx)}
+.calc-out .val.mint{color:var(--mint)}
+.calc-out .sub{font-size:11.5px;color:var(--tx4);font-family:var(--mono)}
+
+/* toc */
+.toc{position:sticky;top:60px;padding:26px 16px;font-size:12px}
+.toc .sg{margin-top:0}
+.toc a{display:block;padding:4px 0;color:var(--tx4)}
+.toc a:hover,.toc a.on{color:var(--mint)}
+
+@media (max-width:760px){
+  .top nav{display:none}
+  .top-r .badge{display:none}
+  .main{padding-left:18px;padding-right:18px}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:16px}
+  .tw table{margin-top:0;min-width:540px}
+  main section h2{font-size:22px}
+}
+footer{border-top:1px solid var(--line);padding:26px 44px 50px;color:var(--tx4);font-size:11.5px;line-height:1.7;max-width:1020px}
+footer a{color:var(--tx2)}
+@media (max-width:900px){footer{padding:22px 20px 40px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/" aria-label="Ascot Vale, home"><img src="/assets/wordmark-ivory.svg" alt="Ascot Vale"></a>
+    <nav aria-label="Primary">
+      <a href="#quickstart" class="on">Developers</a>
+      <a href="#fees">Fees</a>
+      <a href="/full.html">Product</a>
+    </nav>
+    <div class="top-r">
+      <span class="badge"><i></i>Test mode</span>
+      <a class="btn" href="https://www.ascotvale.app/access">Request access</a>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="side" aria-label="Documentation">
+    <input class="search" id="q" type="search" placeholder="Search the docs" aria-label="Search the docs">
+    <nav id="side-nav">
+      <div class="sg">Getting started</div>
+      <a href="#quickstart" class="on">Quickstart</a>
+      <a href="#auth">Authentication</a>
+      <a href="#idempotency">Idempotency</a>
+      <a href="#testmode">Test mode</a>
+      <div class="sg">Core resources</div>
+      <a href="#intents"><span class="m">POST</span>Create an intent</a>
+      <a href="#retrieve"><span class="m">GET</span>Retrieve and list</a>
+      <a href="#confirm"><span class="m">POST</span>Confirm</a>
+      <a href="#refunds"><span class="m">POST</span>Refunds</a>
+      <a href="#payouts"><span class="m">POST</span>Payouts</a>
+      <div class="sg">Events</div>
+      <a href="#webhooks"><span class="m">POST</span>Webhook endpoints</a>
+      <a href="#signatures">Signatures</a>
+      <a href="#events"><span class="m">GET</span>Events</a>
+      <div class="sg">Reference</div>
+      <a href="#fees">Fees and pricing</a>
+      <a href="#errors">Errors</a>
+      <a href="#limits">Rate limits</a>
+    </nav>
+    <div class="side-foot">Sandbox only. Live mode opens with the partner bank — the same request then settles for real.</div>
+  </aside>
+
+  <main class="main" id="main">
+    <p class="crumb"><b>API reference</b> · v1</p>
+    <h1 style="margin-top:10px">Payments for firms that do deals.</h1>
+    <p class="lede">One API for cards, ACH and instant payouts, collected into the same account the deal runs on. A payment intent, a charge, a refund, a payout, an event — with the fee returned on every object, not on an invoice a month later.</p>
+
+    <section id="quickstart">
+      <div class="sec-h"><h2>Quickstart</h2><span class="method post">POST</span><span class="path">/v1/payment_intents</span></div>
+      <p class="body">Create an intent with an amount in dollars converted to cents, and the rail that should carry it. Every write needs an <code>Idempotency-Key</code>; send the same key on a retry and you get the same object, never a second charge.</p>
+      <div class="code" data-tabs>
+        <div class="code-top">
+          <button class="tab on" data-pane="curl">cURL</button>
+          <button class="tab" data-pane="python">Python</button>
+          <button class="tab" data-pane="node">Node</button>
+          <span class="why">test mode</span>
+          <button class="copy" data-copy="quick">Copy</button>
+        </div>
+        <div class="pane on" id="quick-curl"><pre><span class="c"># create an intent for $2,500.00 by ACH</span>
+<span class="m">curl</span> https://api.ascotvale.app/v1/payment_intents \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $ASCOT_VALE_KEY"</span> \
+  <span class="k">-H</span> <span class="s">"Idempotency-Key: order-8841-attempt-1"</span> \
+  <span class="k">-H</span> <span class="s">"Content-Type: application/json"</span> \
+  <span class="k">-d</span> <span class="s">'{
+    "amount": 250000,
+    "currency": "usd",
+    "entity": "ent_ascot42",
+    "rail": "ach",
+    "description": "Closing subscription"
+  }'</span></pre></div>
+        <div class="pane" id="quick-python"><pre><span class="k">import</span> os, requests
+
+resp = requests.post(
+    <span class="s">"https://api.ascotvale.app/v1/payment_intents"</span>,
+    headers={
+        <span class="s">"Authorization"</span>: <span class="s">f"Bearer {os.environ['ASCOT_VALE_KEY']}"</span>,
+        <span class="s">"Idempotency-Key"</span>: <span class="s">"order-8841-attempt-1"</span>,
+    },
+    json={
+        <span class="s">"amount"</span>: <span class="n">250_000</span>,   <span class="c"># cents, always</span>
+        <span class="s">"currency"</span>: <span class="s">"usd"</span>,
+        <span class="s">"entity"</span>: <span class="s">"ent_ascot42"</span>,
+        <span class="s">"rail"</span>: <span class="s">"ach"</span>,
+    },
+)
+intent = resp.json()
+<span class="m">print</span>(intent[<span class="s">"id"</span>], intent[<span class="s">"fee"</span>])</pre></div>
+        <div class="pane" id="quick-node"><pre><span class="k">const</span> resp = <span class="k">await</span> fetch(<span class="s">"https://api.ascotvale.app/v1/payment_intents"</span>, {
+  method: <span class="s">"POST"</span>,
+  headers: {
+    Authorization: <span class="s">`Bearer ${process.env.ASCOT_VALE_KEY}`</span>,
+    <span class="s">"Idempotency-Key"</span>: <span class="s">"order-8841-attempt-1"</span>,
+    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+  },
+  body: JSON.stringify({ amount: <span class="n">250000</span>, currency: <span class="s">"usd"</span>, entity: <span class="s">"ent_ascot42"</span>, rail: <span class="s">"ach"</span> }),
+});
+<span class="k">const</span> intent = <span class="k">await</span> resp.json();</pre></div>
+        <div class="resp-top"><span class="st">200 OK</span><span>41 ms</span><span style="margin-left:auto">one fee, returned with the object</span></div>
+        <pre><span class="k">{</span>
+  <span class="p">"id"</span><span class="k">:</span> <span class="s">"pi_7f3c1e0b9a4d2c81"</span><span class="k">,</span>
+  <span class="p">"object"</span><span class="k">:</span> <span class="s">"payment_intent"</span><span class="k">,</span>
+  <span class="p">"amount"</span><span class="k">:</span> <span class="n">250000</span><span class="k">,</span>
+  <span class="p">"currency"</span><span class="k">:</span> <span class="s">"usd"</span><span class="k">,</span>
+  <span class="p">"entity"</span><span class="k">:</span> <span class="s">"ent_ascot42"</span><span class="k">,</span>
+  <span class="p">"rail"</span><span class="k">:</span> <span class="s">"ach"</span><span class="k">,</span>
+  <span class="p">"status"</span><span class="k">:</span> <span class="s">"processing"</span><span class="k">,</span>
+  <span class="p">"fee"</span><span class="k">:</span> <span class="k">{</span> <span class="p">"amount"</span><span class="k">:</span> <span class="n">250</span><span class="k">,</span> <span class="p">"basis"</span><span class="k">:</span> <span class="s">"50bps_cap_250"</span> <span class="k">},</span>
+  <span class="p">"charge"</span><span class="k">:</span> <span class="k">null</span><span class="k">,</span>
+  <span class="p">"created"</span><span class="k">:</span> <span class="s">"2026-11-21T01:04:22+00:00"</span>
+<span class="k">}</span></pre>
+      </div>
+    </section>
+
+    <section id="auth">
+      <div class="sec-h"><h2>Authentication</h2></div>
+      <p class="body">Every request carries a bearer key. The prefix decides the mode, and the two modes are separate stores — a test key can never read or write a live row.</p>
+      <table>
+        <thead><tr><th>Key</th><th>Mode</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>sk_test_…</code></td><td>Test</td><td>Runs every route against the test ledger. No money moves.</td></tr>
+          <tr><td><code>sk_live_…</code></td><td>Live</td><td>Answers <code>501 live_mode_unavailable</code> until the partner bank is named. Never send one from a browser.</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>Live mode is off by design.</b> There is no acquiring partner yet, so a live key is refused rather than silently failing. The same request works in test mode today and settles for real once the route is signed.</div>
+    </section>
+
+    <section id="idempotency">
+      <div class="sec-h"><h2>Idempotency</h2></div>
+      <p class="body">Every <code>POST</code> needs an <code>Idempotency-Key</code> header. The first request creates the object; a retry with the same key returns that same object with the same id — so a dropped connection never becomes a second charge.</p>
+      <ul class="body">
+        <li>Use a key tied to the business event (<code>order-8841-attempt-1</code>), not to a timestamp.</li>
+        <li>A missing key is <code>400 idempotency_key_required</code>.</li>
+        <li>A different body with the same key still returns the first object: the key identifies the attempt, not the payload.</li>
+      </ul>
+    </section>
+
+    <section id="testmode">
+      <div class="sec-h"><h2>Test mode</h2></div>
+      <p class="body">Test mode is a real ledger of test rows: objects persist for the life of the process, fees are computed for real, events fire and webhooks deliver. What it does not do is move money or hold a card number.</p>
+      <table>
+        <thead><tr><th>Rail</th><th>Test behaviour</th></tr></thead>
+        <tbody>
+          <tr><td><code>card</code></td><td>Settles on confirm. Declines are not simulated yet; the fixture set comes with the issuer.</td></tr>
+          <tr><td><code>ach</code></td><td>Settles on confirm. Returns and NOC codes come with the sponsor.</td></tr>
+          <tr><td><code>instant</code></td><td>Settles on confirm; the fee is the real 25¢.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="intents">
+      <div class="sec-h"><span class="method post">POST</span><h2>Create a payment intent</h2><span class="path">/v1/payment_intents</span></div>
+      <p class="body">An intent is one attempt to collect a known amount. It carries the rail, the entity it belongs to, and the fee that will be charged if it settles.</p>
+      <table>
+        <thead><tr><th>Parameter</th><th>Type</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr><td><code>amount</code> <em>required</em></td><td>integer</td><td>The amount in cents. <code>250000</code> is $2,500.00 — never a decimal.</td></tr>
+          <tr><td><code>entity</code> <em>required</em></td><td>string</td><td>The entity the money belongs to, e.g. <code>ent_ascot42</code>.</td></tr>
+          <tr><td><code>rail</code></td><td>enum</td><td><code>card</code>, <code>ach</code> or <code>instant</code>. Default <code>card</code>.</td></tr>
+          <tr><td><code>currency</code></td><td>string</td><td><code>usd</code> only in test mode.</td></tr>
+          <tr><td><code>description</code></td><td>string</td><td>What the payment is for; it travels to the statement and the event.</td></tr>
+          <tr><td><code>interchange_bps</code></td><td>integer</td><td>Card only. The interchange the card carries; default <code>224</code>. The fee is computed from it and returned.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="retrieve">
+      <div class="sec-h"><span class="method get">GET</span><h2>Retrieve and list</h2><span class="path">/v1/payment_intents/{id}</span></div>
+      <p class="body">Retrieve one intent by id, or list the newest first. Both answer in the key's mode only; an id from test mode is a <code>404</code> on a live key.</p>
+      <div class="code" data-tabs>
+        <div class="code-top">
+          <button class="tab on" data-pane="r1">Retrieve</button>
+          <button class="tab" data-pane="r2">List</button>
+          <button class="copy" data-copy="get">Copy</button>
+        </div>
+        <div class="pane on" id="r1-curl"><pre><span class="m">curl</span> https://api.ascotvale.app/v1/payment_intents/pi_7f3c1e0b9a4d2c81 \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $ASCOT_VALE_KEY"</span></pre></div>
+        <div class="pane" id="r1"><pre><span class="m">curl</span> <span class="s">"https://api.ascotvale.app/v1/payment_intents?limit=10"</span> \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $ASCOT_VALE_KEY"</span></pre></div>
+      </div>
+    </section>
+
+    <section id="confirm">
+      <div class="sec-h"><span class="method post">POST</span><h2>Confirm</h2><span class="path">/v1/payment_intents/{id}/confirm</span></div>
+      <p class="body">Confirming settles the intent in test mode and creates a charge with the fee and the net. Confirming twice is <code>409 already_confirmed</code> — never a second charge.</p>
+      <div class="code" data-tabs>
+        <div class="code-top"><span class="tab on" style="cursor:default">Request</span><button class="copy" data-copy="confirm">Copy</button></div>
+        <div class="pane on"><pre><span class="m">curl</span> -X POST https://api.ascotvale.app/v1/payment_intents/pi_7f3c1e0b9a4d2c81/confirm \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $ASCOT_VALE_KEY"</span> \
+  <span class="k">-H</span> <span class="s">"Idempotency-Key: confirm-8841"</span></pre></div>
+        <div class="resp-top"><span class="st">200 OK</span><span>the intent now carries its charge</span></div>
+        <pre><span class="k">{</span> <span class="p">"id"</span><span class="k">:</span> <span class="s">"pi_7f3c1e0b9a4d2c81"</span><span class="k">,</span> <span class="p">"status"</span><span class="k">:</span> <span class="s">"succeeded"</span><span class="k">,</span>
+  <span class="p">"charge"</span><span class="k">:</span> <span class="s">"ch_2a9d4e77b1c05f30"</span><span class="k">,</span> <span class="p">"amount"</span><span class="k">:</span> <span class="n">250000</span><span class="k">,</span>
+  <span class="p">"fee"</span><span class="k">:</span> <span class="k">{</span> <span class="p">"amount"</span><span class="k">:</span> <span class="n">250</span><span class="k">,</span> <span class="p">"basis"</span><span class="k">:</span> <span class="s">"50bps_cap_250"</span> <span class="k">}</span> <span class="k">}</span></pre>
+      </div>
+    </section>
+
+    <section id="refunds">
+      <div class="sec-h"><span class="method post">POST</span><h2>Refunds</h2><span class="path">/v1/refunds</span></div>
+      <p class="body">Refund a charge in full or in part. The remaining balance is computed from the refunds already against that charge, so three partial refunds can never add up to more than the charge.</p>
+      <table>
+        <thead><tr><th>Parameter</th><th>Type</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr><td><code>charge</code> <em>required</em></td><td>string</td><td>The charge to refund, from a confirmed intent.</td></tr>
+          <tr><td><code>amount</code></td><td>integer</td><td>Cents. Omit for whatever is left on the charge.</td></tr>
+          <tr><td><code>reason</code></td><td>enum</td><td><code>requested_by_customer</code>, <code>duplicate</code>, <code>fraudulent</code>, <code>other</code>.</td></tr>
+        </tbody>
+      </table>
+      <div class="code">
+        <div class="code-top"><span class="tab on" style="cursor:default">Request</span><button class="copy" data-copy="refund">Copy</button></div>
+        <div class="pane on"><pre><span class="m">curl</span> https://api.ascotvale.app/v1/refunds \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $ASCOT_VALE_KEY"</span> \
+  <span class="k">-H</span> <span class="s">"Idempotency-Key: refund-8841-a"</span> \
+  <span class="k">-d</span> <span class="s">'{"charge":"ch_2a9d4e77b1c05f30","amount":40000,"reason":"requested_by_customer"}'</span></pre></div>
+        <div class="resp-top"><span class="st">200 OK</span><span>$400.00 of $2,500.00 refunded</span></div>
+        <pre><span class="k">{</span> <span class="p">"id"</span><span class="k">:</span> <span class="s">"re_5c1b8e0d7a2f4931"</span><span class="k">,</span> <span class="p">"charge"</span><span class="k">:</span> <span class="s">"ch_2a9d4e77b1c05f30"</span><span class="k">,</span>
+  <span class="p">"amount"</span><span class="k">:</span> <span class="n">40000</span><span class="k">,</span> <span class="p">"status"</span><span class="k">:</span> <span class="s">"succeeded"</span><span class="k">,</span> <span class="p">"reason"</span><span class="k">:</span> <span class="s">"requested_by_customer"</span> <span class="k">}</span></pre>
+      </div>
+      <div class="note"><b>More than is left</b> is <code>400 refund_exceeds_charge</code>, and the hint says the exact amount that remains refundable.</div>
+    </section>
+
+    <section id="payouts">
+      <div class="sec-h"><span class="method post">POST</span><h2>Payouts</h2><span class="path">/v1/payouts</span></div>
+      <p class="body">Move money out to a bank or a card. An instant payout is 25¢ flat — the same price the account charges, not a percentage of what is being moved.</p>
+      <div class="code">
+        <div class="code-top"><span class="tab on" style="cursor:default">Request</span><button class="copy" data-copy="payout">Copy</button></div>
+        <div class="pane on"><pre><span class="m">curl</span> https://api.ascotvale.app/v1/payouts \
+  <span class="k">-H</span> <span class="s">"Authorization: Bearer $ASCOT_VALE_KEY"</span> \
+  <span class="k">-H</span> <span class="s">"Idempotency-Key: payout-8841"</span> \
+  <span class="k">-d</span> <span class="s">'{"amount":200000,"entity":"ent_ascot42","rail":"instant"}'</span></pre></div>
+        <div class="resp-top"><span class="st">200 OK</span><span>fees on the object</span></div>
+        <pre><span class="k">{</span> <span class="p">"id"</span><span class="k">:</span> <span class="s">"po_9e4a1c3b7d0f2856"</span><span class="k">,</span> <span class="p">"amount"</span><span class="k">:</span> <span class="n">200000</span><span class="k">,</span>
+  <span class="p">"fee"</span><span class="k">:</span> <span class="k">{</span> <span class="p">"amount"</span><span class="k">:</span> <span class="n">25</span><span class="k">,</span> <span class="p">"basis"</span><span class="k">:</span> <span class="s">"25c_flat"</span> <span class="k">},</span> <span class="p">"net"</span><span class="k">:</span> <span class="n">199975</span><span class="k">,</span>
+  <span class="p">"status"</span><span class="k">:</span> <span class="s">"paid"</span> <span class="k">}</span></pre>
+      </div>
+    </section>
+
+    <section id="webhooks">
+      <div class="sec-h"><span class="method post">POST</span><h2>Webhook endpoints</h2><span class="path">/v1/webhook_endpoints</span></div>
+      <p class="body">Register a URL and the events it wants. Every state change is recorded as an event and delivered to each subscribed endpoint, signed with that endpoint's own secret.</p>
+      <table>
+        <thead><tr><th>Event</th><th>When it fires</th></tr></thead>
+        <tbody>
+          <tr><td><code>payment_intent.created</code></td><td>An intent is created, before any money moves.</td></tr>
+          <tr><td><code>payment_intent.succeeded</code></td><td>An intent is confirmed and its charge exists.</td></tr>
+          <tr><td><code>charge.refunded</code></td><td>A refund is recorded against a charge.</td></tr>
+          <tr><td><code>payout.paid</code></td><td>A payout leaves with its fee and net.</td></tr>
+        </tbody>
+      </table>
+      <div class="note oknote"><b>A dead endpoint never fails a payment.</b> A delivery that errors is recorded on the event with the error, and the intent still succeeds.</div>
+    </section>
+
+    <section id="signatures">
+      <div class="sec-h"><h2>Verifying a signature</h2></div>
+      <p class="body">The header is <code>t=&lt;unix&gt;,v1=&lt;hmac&gt;</code>, where the HMAC is SHA-256 over <code>t.payload</code> with the endpoint's secret. Verify it, and reject a timestamp older than five minutes so a captured body cannot be replayed.</p>
+      <div class="code">
+        <div class="code-top"><span class="tab on" style="cursor:default">Python</span><button class="copy" data-copy="sig">Copy</button></div>
+        <div class="pane on"><pre><span class="k">import</span> hashlib, hmac, time
+
+<span class="k">def</span> <span class="m">verify</span>(payload: str, header: str, secret: str, tolerance: int = 300) -> bool:
+    parts = dict(item.split(<span class="s">"="</span>, 1) <span class="k">for</span> item <span class="k">in</span> header.split(<span class="s">","</span>))
+    stamp, given = int(parts[<span class="s">"t"</span>]), parts[<span class="s">"v1"</span>]
+    <span class="k">if</span> abs(time.time() - stamp) > tolerance:
+        <span class="k">return</span> <span class="k">False</span>
+    expected = hmac.new(secret.encode(), <span class="s">f"{stamp}.{payload}"</span>.encode(), hashlib.sha256).hexdigest()
+    <span class="k">return</span> hmac.compare_digest(given, expected)</pre></div>
+      </div>
+    </section>
+
+    <section id="events">
+      <div class="sec-h"><span class="method get">GET</span><h2>Events</h2><span class="path">/v1/events</span></div>
+      <p class="body">Every event, newest first, with the deliveries it attempted — the URL, the status, and any error. It is the same record a statement line points at.</p>
+      <div class="code">
+        <div class="code-top"><span class="tab on" style="cursor:default">Response</span><button class="copy" data-copy="events">Copy</button></div>
+        <div class="pane on"><pre><span class="k">{</span> <span class="p">"object"</span><span class="k">:</span> <span class="s">"list"</span><span class="k">,</span> <span class="p">"data"</span><span class="k">:</span> <span class="k">[{</span>
+  <span class="p">"id"</span><span class="k">:</span> <span class="s">"evt_1d8f3a0c5b7e2946"</span><span class="k">,</span>
+  <span class="p">"type"</span><span class="k">:</span> <span class="s">"payment_intent.succeeded"</span><span class="k">,</span>
+  <span class="p">"created"</span><span class="k">:</span> <span class="s">"2026-11-21T01:04:29+00:00"</span><span class="k">,</span>
+  <span class="p">"data"</span><span class="k">:</span> <span class="k">{</span> <span class="p">"id"</span><span class="k">:</span> <span class="s">"pi_7f3c1e0b9a4d2c81"</span><span class="k">,</span> <span class="p">"amount"</span><span class="k">:</span> <span class="n">250000</span> <span class="k">},</span>
+  <span class="p">"deliveries"</span><span class="k">:</span> <span class="k">[{</span> <span class="p">"url"</span><span class="k">:</span> <span class="s">"https://example.com/hook"</span><span class="k">,</span> <span class="p">"status"</span><span class="k">:</span> <span class="n">200</span> <span class="k">}]</span>
+<span class="k">}]}</span></pre></div>
+      </div>
+    </section>
+
+    <section id="fees">
+      <div class="sec-h"><h2>Fees and pricing</h2></div>
+      <p class="body">The price is published, not quoted: interchange plus 35 bps plus 15¢ on a card, 50 bps capped at $2.50 on ACH, 25¢ flat on an instant payout. No monthly minimum, and a dispute is $0.</p>
+      <table>
+        <thead><tr><th>Rail</th><th>Price</th><th class="r">on $100</th><th class="r">on $2,500</th><th class="r">on $10,000</th><th class="r">Stripe today</th></tr></thead>
+        <tbody>
+          <tr><td>Card</td><td>interchange + 35 bps + 15¢</td><td class="r">$2.74</td><td class="r">$64.90</td><td class="r">$259.15</td><td class="r">$3.20 · $72.80 · $290.30</td></tr>
+          <tr><td>ACH</td><td>50 bps, capped $2.50</td><td class="r">$0.50</td><td class="r">$2.50</td><td class="r">$2.50</td><td class="r">$0.80 · $5.00 · $5.00</td></tr>
+          <tr><td>Instant payout</td><td>25¢ flat</td><td class="r">$0.25</td><td class="r">$0.25</td><td class="r">$0.25</td><td class="r">$1.50 · $37.50 · $150.00</td></tr>
+          <tr><td>Dispute</td><td>$0</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r">$15.00</td></tr>
+        </tbody>
+      </table>
+      <p class="body" style="margin-top:10px;font-size:12.5px;color:var(--tx3)">Card figures assume 2.24% interchange. Stripe's published US rates: 2.9% + 30¢ on cards, 0.8% capped at $5.00 on ACH Direct Debit, 1.5% with a 50¢ minimum on an instant payout.</p>
+
+      <div class="calc" aria-label="Fee calculator">
+        <div class="calc-b">
+          <div class="field"><label for="amt">Amount</label><input id="amt" type="text" inputmode="decimal" value="2500.00"></div>
+          <div class="field"><label for="rail">Rail</label>
+            <select id="rail">
+              <option value="card">Card</option>
+              <option value="ach" selected>ACH</option>
+              <option value="instant">Instant payout</option>
+            </select>
+          </div>
+          <div class="field"><label for="ic">Interchange (card only)</label><input id="ic" type="text" inputmode="decimal" value="2.24"></div>
+        </div>
+        <div class="calc-out" aria-live="polite">
+          <div><div class="lab">Fee</div><div class="val mint" id="fee">$2.50</div><div class="sub" id="basis">50bps_cap_250</div></div>
+          <div><div class="lab">Net to the firm</div><div class="val" id="net">$2,497.50</div></div>
+          <div><div class="lab">On Stripe</div><div class="val" id="stripe" style="color:var(--tx2)">$5.00</div></div>
+        </div>
+      </div>
+      <p class="body" style="margin-top:10px;font-size:12.5px;color:var(--tx3)">Computed with the same rules as the sandbox: cents only, rounded half-up once, at the end.</p>
+    </section>
+
+    <section id="errors">
+      <div class="sec-h"><h2>Errors</h2></div>
+      <p class="body">One shape for every failure, so a client has one branch to write.</p>
+      <div class="code">
+        <div class="code-top"><span class="tab on" style="cursor:default">Error body</span><button class="copy" data-copy="err">Copy</button></div>
+        <div class="pane on"><pre><span class="k">{</span> <span class="p">"error"</span><span class="k">:</span> <span class="k">{</span>
+  <span class="p">"code"</span><span class="k">:</span> <span class="s">"refund_exceeds_charge"</span><span class="k">,</span>
+  <span class="p">"message"</span><span class="k">:</span> <span class="s">"That refund is more than what is left on the charge."</span><span class="k">,</span>
+  <span class="p">"hint"</span><span class="k">:</span> <span class="s">"$21.00 remains refundable."</span>
+<span class="k">}}</span></pre></div>
+      </div>
+      <table>
+        <thead><tr><th>Status</th><th>Code</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td>400</td><td><code>invalid_request</code></td><td>The body is wrong; the message names the field and what it expected.</td></tr>
+          <tr><td>400</td><td><code>idempotency_key_required</code></td><td>Send an <code>Idempotency-Key</code> on every write.</td></tr>
+          <tr><td>400</td><td><code>refund_exceeds_charge</code></td><td>Refund less than the hint says is left.</td></tr>
+          <tr><td>401</td><td><code>invalid_api_key</code></td><td>No usable bearer key.</td></tr>
+          <tr><td>404</td><td><code>not_found</code></td><td>Wrong id, or the id belongs to the other mode.</td></tr>
+          <tr><td>409</td><td><code>already_confirmed</code></td><td>The intent is not processing; read it instead of confirming again.</td></tr>
+          <tr><td>501</td><td><code>live_mode_unavailable</code></td><td>Live mode waits on the partner bank. Use a test key.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="limits">
+      <div class="sec-h"><h2>Rate limits</h2></div>
+      <p class="body">Test mode answers 120 requests a minute per key. A limit response is the same error shape with <code>429 rate_limited</code> and a <code>Retry-After</code> header. Limits on the live service are set with the acquiring partner.</p>
+      <div class="note"><b>Nothing here is a promise of a processing licence.</b> Ascot Vale is a financial technology company, not a bank; the sandbox exists so the API can be built and reviewed before the partner route is signed.</div>
+    </section>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="sg">On this page</div>
+    <nav id="toc-nav">
+      <a href="#quickstart">Quickstart</a>
+      <a href="#auth">Authentication</a>
+      <a href="#idempotency">Idempotency</a>
+      <a href="#testmode">Test mode</a>
+      <a href="#intents">Create an intent</a>
+      <a href="#retrieve">Retrieve and list</a>
+      <a href="#confirm">Confirm</a>
+      <a href="#refunds">Refunds</a>
+      <a href="#payouts">Payouts</a>
+      <a href="#webhooks">Webhooks</a>
+      <a href="#signatures">Signatures</a>
+      <a href="#events">Events</a>
+      <a href="#fees">Fees</a>
+      <a href="#errors">Errors</a>
+      <a href="#limits">Rate limits</a>
+    </nav>
+  </aside>
+</div>
+
+<footer>
+  <p>Ascot Vale is a financial technology company, not a bank. Banking services will be provided by a partner bank. This reference documents a test-mode service: no money moves, no card data is accepted, and a live key is refused until the partner route exists. © 2026 Protostellar Inc. · <a href="/">Home</a> · <a href="/full.html">Product</a> · <a href="https://www.ascotvale.app/access">Request access</a></p>
+</footer>
+
+<script>
+(function(){
+  // code tabs
+  document.querySelectorAll("[data-tabs]").forEach(function(block){
+    var tabs = Array.prototype.slice.call(block.querySelectorAll(".tab[data-pane]"));
+    tabs.forEach(function(tab, index){
+      tab.addEventListener("click", function(){
+        tabs.forEach(function(t){ t.classList.remove("on"); });
+        tab.classList.add("on");
+        block.querySelectorAll(".pane").forEach(function(p){ p.classList.remove("on"); });
+        var panes = block.querySelectorAll(".pane");
+        if (panes[index]) panes[index].classList.add("on");
+      });
+    });
+  });
+
+  // copy buttons
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var code = btn.closest(".code") || btn.parentElement.parentElement;
+      var pane = code.querySelector(".pane.on pre") || code.querySelector("pre");
+      var text = pane ? pane.innerText : "";
+      navigator.clipboard.writeText(text).then(function(){
+        var old = btn.textContent;
+        btn.textContent = "Copied";
+        btn.classList.add("done");
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove("done"); }, 1400);
+      });
+    });
+  });
+
+  // tables scroll on a narrow screen rather than squeezing
+  document.querySelectorAll("main table").forEach(function(t){
+    if (t.parentElement && t.parentElement.classList.contains("tw")) return;
+    var wrap = document.createElement("div");
+    wrap.className = "tw";
+    t.parentNode.insertBefore(wrap, t);
+    wrap.appendChild(t);
+  });
+
+  // sidebar filter
+  var q = document.getElementById("q");
+  if (q) q.addEventListener("input", function(){
+    var term = q.value.trim().toLowerCase();
+    document.querySelectorAll("#side-nav a").forEach(function(a){
+      a.classList.toggle("hidden", term.length > 0 && a.textContent.toLowerCase().indexOf(term) === -1);
+    });
+  });
+
+  // scrollspy for the sidebar and the on-this-page rail
+  var ids = Array.prototype.map.call(document.querySelectorAll("main section[id]"), function(s){ return s.id; });
+  function spy(){
+    var found = ids[0];
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 140) found = id;
+    });
+    document.querySelectorAll("#side-nav a, #toc-nav a").forEach(function(a){
+      a.classList.toggle("on", a.getAttribute("href") === "#" + found);
+    });
+  }
+  window.addEventListener("scroll", spy, {passive:true});
+  spy();
+
+  // fee calculator — the same rules as fees.py
+  var amt = document.getElementById("amt"), rail = document.getElementById("rail"),
+      ic = document.getElementById("ic"), feeEl = document.getElementById("fee"),
+      netEl = document.getElementById("net"), basisEl = document.getElementById("basis"),
+      stripeEl = document.getElementById("stripe");
+  function bps(cents, b){ return Math.floor((cents * b + 5000) / 10000); }
+  function money(cents){ return "$" + (cents / 100).toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function calc(){
+    var cents = Math.round(parseFloat(String(amt.value).replace(/[^0-9.]/g, "")) * 100);
+    if (!isFinite(cents) || cents <= 0) { feeEl.textContent = "—"; netEl.textContent = "—"; stripeEl.textContent = "—"; basisEl.textContent = "enter an amount"; return; }
+    var choice = rail.value, fee, basis, stripe;
+    if (choice === "card") {
+      var icBps = Math.round(parseFloat(ic.value || "2.24") * 100);
+      if (!isFinite(icBps) || icBps < 0) icBps = 224;
+      fee = bps(cents, icBps) + bps(cents, 35) + 15;
+      basis = "interchange + 35bps + 15c";
+      stripe = bps(cents, 290) + 30;
+    } else if (choice === "ach") {
+      fee = Math.min(bps(cents, 50), 250);
+      basis = "50bps_cap_250";
+      stripe = Math.min(bps(cents, 80), 500);
+    } else {
+      fee = 25;
+      basis = "25c_flat";
+      stripe = Math.max(Math.round(cents * 0.015), 50);
+    }
+    feeEl.textContent = money(fee);
+    netEl.textContent = money(cents - fee);
+    basisEl.textContent = basis;
+    stripeEl.textContent = money(stripe);
+  }
+  [amt, rail, ic].forEach(function(el){ if (el) { el.addEventListener("input", calc); el.addEventListener("change", calc); } });
+  calc();
+})();
+</script>
+</body>
+</html>

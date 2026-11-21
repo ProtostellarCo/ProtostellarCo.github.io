@@ -65,12 +65,16 @@ img,svg{display:block;max-width:100%}
 
 .btn{height:48px;padding:0 22px;display:inline-flex;align-items:center;gap:14px;border-radius:var(--r);font-family:var(--ui);font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;transition:background .12s linear,box-shadow .12s linear}
 .btn-p{background:var(--g-700);color:var(--n-0);box-shadow:0 1px 2px rgba(4,53,40,.22),0 6px 14px -6px rgba(4,53,40,.35)}
-.btn-p:hover{background:var(--g-800);color:var(--n-0)}
+.btn-p:hover{background:var(--g-950);color:var(--n-0)}
 .btn-s{background:transparent;color:var(--n-900);box-shadow:inset 0 0 0 1px var(--n-300);font-weight:500}
 .btn-s:hover{box-shadow:inset 0 0 0 1px var(--n-500)}
 .btn .arw{font-family:var(--fig);font-size:16px;line-height:1;transform:translateY(-.5px)}
 .nav .btn{height:38px;padding:0 16px;font-size:14px;box-shadow:none}
 .nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--n-300);border-radius:var(--r);height:38px;padding:0 12px;font:500 14px var(--ui);color:var(--n-900)}
+.mobile-menu{display:none;border-top:1px solid var(--hairline);background:var(--page)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:14px var(--pad);font-size:15px;color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--hairline)}
+.mobile-menu a:last-child{border-bottom:0}
 
 /* ---------- hero ---------- */
 .hero{padding:clamp(48px,7vw,96px) 0 clamp(40px,5vw,72px)}
@@ -139,7 +143,7 @@ img,svg{display:block;max-width:100%}
 
 /* steps */
 .steps{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--hairline)}
-.step{flex:1;padding:0 0 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--n-500);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.step{flex:1;padding:0 0 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--n-600);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
 .step.on{color:var(--g-700);border-bottom-color:var(--g-700)}
 .step b{font-family:var(--fig);font-weight:500;margin-right:8px;color:inherit}
 .field{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--hairline);font-size:13.5px}
@@ -279,6 +283,14 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
     </div>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
   </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#accounts">Accounts</a>
+    <a href="#payments">Payments</a>
+    <a href="#cards">Cards</a>
+    <a href="#controls">Controls</a>
+    <a href="#record">The record</a>
+    <a href="#how">How it works</a>
+  </div>
 </header>
 
 <main id="main">
@@ -310,11 +322,11 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
       </div>
       <div class="bal">
         <div class="bal-lab">Available balance</div>
-        <div class="bal-fig">$2,481,250.00</div>
-        <div class="bal-sub">Opening $400,000.00 · 3 movements today · 09:41 ET</div>
+        <div class="bal-fig">$2,480,010.00</div>
+        <div class="bal-sub">Opening $400,000.00 · 3 movements · 09:41 ET</div>
       </div>
       <div class="attn">
-        <div class="attn-row"><span class="ico" aria-hidden="true"></span> A wire is waiting for a second signature <span class="amt">$418,750.00</span></div>
+        <div class="attn-row"><span class="ico" aria-hidden="true"></span> A wire is waiting for a second signature <span class="amt">$312,500.00</span></div>
         <div class="attn-row"><span class="ico" aria-hidden="true"></span> One document to sign <span class="amt">14:00</span></div>
       </div>
       <div class="moves">
@@ -331,7 +343,7 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
           <span class="move-amt">−$1,240.00</span>
         </div>
       </div>
-      <div class="panel-foot"><span>Nothing here is a placeholder</span><a href="#accounts">Open the account →</a></div>
+      <div class="panel-foot"><span>Sample account · seeded data</span><a href="#accounts">Open the account →</a></div>
     </div>
   </div>
 </section>
@@ -368,7 +380,7 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
       </div>
       <div class="tbl-r" role="row">
         <div role="cell"><div class="tbl-name">Ascot 42 LLC</div><div class="tbl-sub">Deal · •••• 9912</div></div>
-        <div class="tbl-amt" role="cell">$2,481,250.00</div>
+        <div class="tbl-amt" role="cell">$2,480,010.00</div>
         <div class="tbl-tag" role="cell"><span class="pill amber">Closing</span></div>
       </div>
       <div class="tbl-foot">One login, three balances, and a consolidated position the firm can actually read.</div>
@@ -392,11 +404,11 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
         </div>
         <div class="mini-b">
           <dl style="margin:0">
-            <div class="field"><dt>To</dt><dd>Wachtell, Lipton, Rosen &amp; Katz<span class="verified"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg>verified</span></dd></div>
+            <div class="field"><dt>To</dt><dd>Ropes &amp; Gray LLP<span class="verified"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg>verified</span></dd></div>
             <div class="field"><dt>From</dt><dd>Ascot 42 LLC · •••• 9912</dd></div>
-            <div class="field"><dt>Amount</dt><dd class="fig">$418,750.00</dd></div>
+            <div class="field"><dt>Amount</dt><dd class="fig">$18,450.00</dd></div>
             <div class="field"><dt>Rail</dt><dd>Domestic wire</dd></div>
-            <div class="field"><dt>Memo</dt><dd>Retainer and closing fees</dd></div>
+            <div class="field"><dt>Memo</dt><dd>Filing fees</dd></div>
           </dl>
           <div class="approval-acts">
             <span class="btn btn-p btn-sm" role="presentation">Approve and send</span>
@@ -409,8 +421,8 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
         <div class="receipt">
           <span class="receipt-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></span>
           <div>
-            <div class="receipt-t">Wire sent · $418,750.00</div>
-            <div class="receipt-s">Wachtell, Lipton, Rosen &amp; Katz · Ascot 42 LLC<br>Sent 08:03, delivered 11:26, $18.00 fee</div>
+            <div class="receipt-t">Wire sent · $18,450.00</div>
+            <div class="receipt-s">Ropes &amp; Gray LLP · Ascot 42 LLC<br>Sent 09:22, delivered 10:04, $18.00 fee</div>
             <div class="receipt-ref">REF AV-8841-0412 · receipt in the record</div>
           </div>
         </div>
@@ -460,10 +472,10 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
       <p class="sec-lede">The threshold is set per firm and per entity. Anything above it waits for a named person, and the record says who asked, who signed and when. Below it, the payment goes — the control is a limit, not a queue for everything.</p>
     </div>
     <div class="approval">
-      <div class="approval-top"><strong>Waiting for approval</strong><span>Requested 08:03</span></div>
+      <div class="approval-top"><strong>Waiting for approval</strong><span>Requested 10:02</span></div>
       <div class="approval-b">
-        <div class="approval-amt">$418,750.00</div>
-        <div class="approval-to">Wire to Wachtell, Lipton, Rosen &amp; Katz · Ascot 42 LLC</div>
+        <div class="approval-amt">$312,500.00</div>
+        <div class="approval-to">Wire to Kirkland &amp; Ellis · Ascot 42 LLC</div>
         <div class="approval-wait"><span class="avatar" aria-hidden="true">DO</span> Dana Okonkwo can approve · the request is above the firm's $25,000 threshold</div>
         <div class="approval-acts">
           <span class="btn btn-p btn-sm" role="presentation">Approve</span>
@@ -534,7 +546,7 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
       </div>
       <div class="qa">
         <h3>Who is it for?</h3>
-        <p>Firms that do deals, and the entities a closing creates. A private-market firm, a fund's SPV, the company a transaction sets up. It is not a consumer account, and it is not a personal one.</p>
+        <p>Firms that do deals, and the entities a closing creates: a private-market firm, a fund's SPV, the company a transaction sets up. Never a personal or consumer account.</p>
       </div>
       <div class="qa">
         <h3>What does an account cost?</h3>
@@ -577,5 +589,22 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var b=document.querySelector(".nav-toggle"), m=document.getElementById("mobile-menu");
+  if(!b||!m) return;
+  b.addEventListener("click",function(){
+    var open=b.getAttribute("aria-expanded")==="true";
+    b.setAttribute("aria-expanded",open?"false":"true");
+    m.classList.toggle("open",!open);
+  });
+  m.addEventListener("click",function(e){
+    if(e.target.tagName==="A"){b.setAttribute("aria-expanded","false");m.classList.remove("open");}
+  });
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"&&m.classList.contains("open")){b.setAttribute("aria-expanded","false");m.classList.remove("open");b.focus();}
+  });
+})();
+</script>
 </body>
 </html>

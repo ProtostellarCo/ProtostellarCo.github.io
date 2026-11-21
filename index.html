@@ -248,11 +248,17 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
   .panel{max-width:560px}
 }
 @media (max-width:640px){
+  .nav-in{gap:12px;height:60px}
+  .nav-cta{display:none}
+  .nav-toggle{margin-left:auto}
+  .mobile-menu a.mm-cta{color:var(--g-700);font-weight:600}
+  .attn-row .amt{white-space:nowrap}
+  .panel-foot{flex-wrap:wrap;gap:4px 14px}
+  .rails-in{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;padding:20px 0}
   .hero{padding-top:36px}
   .hero h1{font-size:clamp(38px,11vw,48px)}
   .btn{width:100%;justify-content:space-between}
   .hero-actions{gap:12px}
-  .nav .btn{width:auto}
   .tbl-h,.tbl-r{grid-template-columns:minmax(0,1fr) 104px;gap:10px;padding:13px 16px}
   .tbl-h span:last-child,.tbl-r .tbl-tag{display:none}
   .tbl-amt{font-size:13.5px}
@@ -290,6 +296,7 @@ footer{background:var(--g-900);color:rgba(255,255,255,.7);padding:clamp(48px,6vw
     <a href="#controls">Controls</a>
     <a href="#record">The record</a>
     <a href="#how">How it works</a>
+    <a class="mm-cta" href="#open">Open an account</a>
   </div>
 </header>
 

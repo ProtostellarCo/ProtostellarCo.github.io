@@ -103,6 +103,15 @@ h1 .dot{color:var(--g-700)}
 .close .btn{background:#fff;color:var(--g-900);position:relative}
 .close .btn:hover{background:var(--g-25)}
 
+.promo{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--g-100);border:1px solid var(--g-100);border-radius:var(--rface);overflow:hidden;margin-top:6px}
+.pr{background:var(--g-25);padding:clamp(20px,2.6vw,30px) clamp(18px,2.6vw,28px);display:flex;gap:18px;align-items:flex-start}
+.pr-n{font-family:var(--display);font-size:clamp(30px,3.4vw,40px);line-height:1;letter-spacing:-.03em;color:var(--g-700)}
+.pr-t{font-size:13.5px;color:var(--n-900);font-weight:500;margin-top:2px}
+.pr-s{font-size:12px;color:var(--n-700);margin-top:5px;line-height:1.5}
+.pr-note{grid-column:1/-1;background:var(--g-25);padding:12px clamp(18px,2.6vw,28px);font-size:11.5px;color:var(--n-700);border-top:1px solid var(--g-100);display:flex;gap:8px;align-items:baseline}
+.pr-note b{color:var(--g-700);font-weight:500}
+@media (max-width:700px){.promo{grid-template-columns:1fr}}
+
 footer{border-top:1px solid var(--hairline);padding:28px 0 36px}
 .f{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:11px;color:var(--text-3);line-height:1.65}
 .f p{max-width:66ch}
@@ -164,7 +173,23 @@ footer{border-top:1px solid var(--hairline);padding:28px 0 36px}
   </div>
 </section>
 
-<section class="sec" id="included">
+<section class="sec" style="padding:0 0 clamp(6px,1vw,10px)">
+  <div class="wrap">
+    <div class="promo">
+      <div class="pr">
+        <div class="pr-n">$10</div>
+        <div><div class="pr-t">When you join</div><div class="pr-s">Credited the moment your firm and its identity checks pass — not on a form.</div></div>
+      </div>
+      <div class="pr">
+        <div class="pr-n">$5</div>
+        <div><div class="pr-t">For every firm you bring</div><div class="pr-s">Paid when they send their first payment with real money — so the bonus is for a customer, not an account.</div></div>
+      </div>
+      <div class="pr-note"><span><b>Promo credit.</b> Send it, spend it — it never becomes cash until your account has had $1,000 of real money through it. Terms apply.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="included" style="padding-top:clamp(24px,3vw,44px)">
   <div class="wrap">
     <p class="eyebrow"><span class="dot"></span>Three things, done properly</p>
     <h2 class="sec-h" style="margin-top:14px">A short list on purpose.</h2>
